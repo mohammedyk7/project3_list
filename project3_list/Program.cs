@@ -33,7 +33,7 @@ class Program
             else if (choice == 2)
             {
                 Console.Write("Enter booking ID to cancel: ");
-                string id = Console.ReadLine();
+                string? id = Console.ReadLine();
                 CancelBooking(id);
             }
             else if (choice == 3)
@@ -105,6 +105,7 @@ class Program
         Console.WriteLine($"Booking successful! Your ID is: {bookingID}");
     }
 
+    // Removed the unused local function 'GenerateBookingID' to fix CS8321.
     static void CancelBooking(string? id)
     {
         if (string.IsNullOrWhiteSpace(id))
@@ -124,39 +125,6 @@ class Program
         else
         {
             Console.WriteLine("Booking not found.");
-        }
-        static string GenerateBookingID(string name)
-        {
-            return name + DateTime.Now.Ticks.ToString().Substring(10);
-        }
-
-        static void SearchBookingsByDestination(string destination)
-        {
-            Console.WriteLine($"\nBookings to {destination}:");
-            for (int i = 0; i < bookedFlightCodes.Count; i++)
-            {
-                int flightIndex = flightCodes.IndexOf(bookedFlightCodes[i]);
-                if (flightIndex >= 0 && toCities[flightIndex].Equals(destination, StringComparison.OrdinalIgnoreCase))
-                {
-                    Console.WriteLine($"{passengerNames[i]} (Booking ID: {bookingIDs[i]})");
-                }
-            }
-        }
-
-        static void UpdateFlightTime(string code)
-        {
-            int index = flightCodes.IndexOf(code);
-            if (index >= 0)
-            {
-                Console.Write("Enter new departure time (yyyy-MM-dd HH:mm): ");
-                string newTime = Console.ReadLine();
-                departureTimes[index] = newTime;
-                Console.WriteLine("Flight time updated.");
-            }
-            else
-            {
-                Console.WriteLine("Flight not found.");
-            }
         }
     }
 
