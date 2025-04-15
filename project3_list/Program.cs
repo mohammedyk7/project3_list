@@ -27,7 +27,7 @@ class Program
                 Console.Write("Enter your name: ");
                 string? name = Console.ReadLine();
                 Console.Write("Enter flight code (or leave blank for default): ");
-                string code = Console.ReadLine();
+                string? code = Console.ReadLine();
                 BookFlight(name, string.IsNullOrWhiteSpace(code) ? "Default001" : code);
             }
             else if (choice == 2)
