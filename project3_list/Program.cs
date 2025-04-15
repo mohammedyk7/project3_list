@@ -105,8 +105,14 @@ class Program
         Console.WriteLine($"Booking successful! Your ID is: {bookingID}");
     }
 
-    static void CancelBooking(string id)
+    static void CancelBooking(string? id)
     {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            Console.WriteLine("Invalid booking ID.");
+            return;
+        }
+
         int index = bookingIDs.IndexOf(id);
         if (index >= 0)
         {
