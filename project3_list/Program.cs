@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 class Program
 {
-    // Global lists
+    // lists instead of the array 
     static List<string> flightCodes = new List<string>();
     static List<string> fromCities = new List<string>();
     static List<string> toCities = new List<string>();
