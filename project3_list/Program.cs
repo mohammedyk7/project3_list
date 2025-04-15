@@ -125,5 +125,40 @@ class Program
         {
             Console.WriteLine("Booking not found.");
         }
+        static string GenerateBookingID(string name)
+        {
+            return name + DateTime.Now.Ticks.ToString().Substring(10);
+        }
+
+        static void SearchBookingsByDestination(string destination)
+        {
+            Console.WriteLine($"\nBookings to {destination}:");
+            for (int i = 0; i < bookedFlightCodes.Count; i++)
+            {
+                int flightIndex = flightCodes.IndexOf(bookedFlightCodes[i]);
+                if (flightIndex >= 0 && toCities[flightIndex].Equals(destination, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine($"{passengerNames[i]} (Booking ID: {bookingIDs[i]})");
+                }
+            }
+        }
+
+        static void UpdateFlightTime(string code)
+        {
+            int index = flightCodes.IndexOf(code);
+            if (index >= 0)
+            {
+                Console.Write("Enter new departure time (yyyy-MM-dd HH:mm): ");
+                string newTime = Console.ReadLine();
+                departureTimes[index] = newTime;
+                Console.WriteLine("Flight time updated.");
+            }
+            else
+            {
+                Console.WriteLine("Flight not found.");
+            }
+        }
     }
+
 }
+
