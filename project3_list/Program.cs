@@ -87,18 +87,24 @@ class Program
 
     static bool ValidateFlightCode(string code)
     {
-        return flightCodes.Contains(code);
+        return flightCodes.Exists(f => f.Equals(code, StringComparison.OrdinalIgnoreCase));
     }
 
-    static void BookFlight(string name, string code)
+    static void BookFlight(string? name, string code)
     {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            Console.WriteLine("Invalid name.");
+            return;
+        }
+
         if (!ValidateFlightCode(code))
         {
             Console.WriteLine("Invalid flight code.");
             return;
         }
 
-        string bookingID = name + DateTime.Now.Ticks.ToString().Substring(10);
+        string bookingID = GenerateBookingID(name);
         bookingIDs.Add(bookingID);
         passengerNames.Add(name);
         bookedFlightCodes.Add(code);
@@ -130,19 +136,26 @@ class Program
 
     static string GenerateBookingID(string name)
     {
-        return name + DateTime.Now.Ticks.ToString().Substring(10);
+        return $"{name}-{Guid.NewGuid()}";
     }
 
     static void SearchBookingsByDestination(string destination)
     {
         Console.WriteLine($"\nBookings to {destination}:");
+        bool found = false;
         for (int i = 0; i < bookedFlightCodes.Count; i++)
         {
             int flightIndex = flightCodes.IndexOf(bookedFlightCodes[i]);
             if (flightIndex >= 0 && toCities[flightIndex].Equals(destination, StringComparison.OrdinalIgnoreCase))
             {
                 Console.WriteLine($"{passengerNames[i]} (Booking ID: {bookingIDs[i]})");
+                found = true;
             }
+        }
+
+        if (!found)
+        {
+            Console.WriteLine("No bookings found for this destination.");
         }
     }
 
@@ -153,8 +166,15 @@ class Program
         {
             Console.Write("Enter new departure time (yyyy-MM-dd HH:mm): ");
             string? newTime = Console.ReadLine();
-            departureTimes[index] = newTime;
-            Console.WriteLine("Flight time updated.");
+            if (DateTime.TryParseExact(newTime, "yyyy-MM-dd HH:mm", null, System.Globalization.DateTimeStyles.None, out _))
+            {
+                departureTimes[index] = newTime;
+                Console.WriteLine("Flight time updated.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid date format.");
+            }
         }
         else
         {
