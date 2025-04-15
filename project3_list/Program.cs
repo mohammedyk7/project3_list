@@ -54,7 +54,7 @@ class Program
 
     static void DisplayWelcomeMessage()
     {
-        Console.WriteLine("\n=== Welcome to Easy Air ===\n");
+        Console.WriteLine("\n=== Welcome to CodeLine AirWays ===\n");
     }
 
     static int ShowMainMenu()
