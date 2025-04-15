@@ -70,7 +70,7 @@ class Program
 
     static void AddFlight(string code, string from, string to, string time, int duration)
     {
-        flightCodes.Add(code);
+        flightCodes.Add(code); 
         fromCities.Add(from);
         toCities.Add(to);
         departureTimes.Add(time);
