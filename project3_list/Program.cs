@@ -10,7 +10,6 @@ class Program
     static List<string> toCities = new List<string>();
     static List<string> departureTimes = new List<string>();
     static List<int> durations = new List<int>();
-
     static List<string> bookingIDs = new List<string>();
     static List<string> passengerNames = new List<string>();
     static List<string> bookedFlightCodes = new List<string>();
