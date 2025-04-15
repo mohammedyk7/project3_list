@@ -105,7 +105,7 @@ class Program
         Console.WriteLine($"Booking successful! Your ID is: {bookingID}");
     }
 
-    // Removed the unused local function 'GenerateBookingID' to fix CS8321.
+    
     static void CancelBooking(string? id)
     {
         if (string.IsNullOrWhiteSpace(id))
